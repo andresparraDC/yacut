@@ -1,12 +1,12 @@
-""" Спринт 21 - Проект «сервис YaCut» 
+""" Спринт 21 - Проект «сервис YaCut»
 Автор   Фредди Андрес Парра Орельяна
-        Студент факультета Бэкенд. Когорта 14+ 
- 
+        Студент факультета Бэкенд. Когорта 14+
+
 Имя файла: api_views.py
  - API проекта
-Функции: 
+Функции:
  - short_url().
- - get_mapping_url() 
+ - get_mapping_url()
 """
 from http import HTTPStatus
 from flask import request, url_for, jsonify
@@ -30,21 +30,21 @@ def short_url():
     data = request.get_json()
     if not data:
         raise APIException('Отсутствует тело запроса')
-    
+
     APIRequest_Fields = URLMap_Fields(None, 'url', 'custom_id', None)
     original = data.get(APIRequest_Fields.original)
     if original is None:
         raise APIException(f'\"{APIRequest_Fields.original}\" является обязательным полем!')
     short = data.get(APIRequest_Fields.short)
     if short:
-        exc = APIException('Указано недопустимое имя для короткой ссылки') # exception
+        exc = APIException('Указано недопустимое имя для короткой ссылки')  # exception
         length_validation(short, exc, max=MAX_LEN_SHORT)
         symbols_validation(short, exc)
         if short_url_exist(short):
             raise APIException(f'Имя \"{short}\" уже занято.')
     else:
         short = get_unique_short_id()
-    
+
     add_url_map(original, short)
     APIResponse_Fields = URLMap_Fields(None, 'url', 'short_link', None)
     response_dict = {
