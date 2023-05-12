@@ -1,7 +1,7 @@
-""" Спринт 21 - Проект «сервис YaCut» 
+""" Спринт 21 - Проект «сервис YaCut»
 Автор   Фредди Андрес Парра Орельяна
-        Студент факультета Бэкенд. Когорта 14+ 
- 
+        Студент факультета Бэкенд. Когорта 14+
+
 Имя файла: utils.py
  - Вспомогательные функции для работы с views.py.
 Функции
@@ -23,7 +23,7 @@ def get_unique_short_id(symbols=ALLOWED_SYMBOLS, length=LEN_AUTO_SHORT):
     """
     Алгоритм формирования коротких идентификаторов переменной длины.
     """
-    result = [None]*length
+    result = [None] * length
     while True:
         for index in range(length):
             result[index] = random.choice(symbols)
