@@ -43,3 +43,12 @@ class Allower(AnyOf):
             field.data,
             ValidationError(self.message)
         )
+
+def length_validation(sequence, exception, min=1, max=1):
+    try:
+        getattr(sequence, '__len__')
+    except AttributeError:
+        raise AttributeError
+    if min <= len(sequence) <= max:
+        return
+    raise exception

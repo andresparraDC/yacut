@@ -52,7 +52,7 @@ def get_urls_from_map(form):
         # Верните исходную ссылку, короткую ссылку и сообщение об ошибке.
         return original, short, err_message
     if short_url_exist(short):
-        err_message = f'Короткая ссылка {short} уже занято!'
+        err_message = f'Имя {short} уже занято!'
         return original, short, err_message
     return original, short, err_message
 
