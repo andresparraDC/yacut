@@ -61,7 +61,8 @@ def short_url():
 @app.route('/api/id/<string:short_id>/', methods=['GET'])
 def get_mapping_url(short_id):
     """
-    GET-запрос на получение оригинальной ссылки по указанному короткому идентификатору.
+    GET-запрос на получение оригинальной ссылки 
+    по указанному короткому идентификатору.
     """
     APIResponse_Fields = URLMap_Fields(None, 'url', 'short_link', None)
 
