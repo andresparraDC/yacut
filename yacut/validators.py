@@ -1,13 +1,13 @@
-""" Спринт 21 - Проект «сервис YaCut» 
+""" Спринт 21 - Проект «сервис YaCut»
 Автор   Фредди Андрес Парра Орельяна
-        Студент факультета Бэкенд. Когорта 14+ 
- 
+        Студент факультета Бэкенд. Когорта 14+
+
 Имя файла: validators.py
  - Документ, описывающий все валидаторы проекта
 Функции
  - symbols_validation
 Классы
- - Allower 
+ - Allower
 """
 from wtforms.validators import DataRequired, URL, Optional, Length, AnyOf, ValidationError
 
@@ -43,6 +43,7 @@ class Allower(AnyOf):
             field.data,
             ValidationError(self.message)
         )
+
 
 def length_validation(sequence, exception, min=1, max=1):
     try:
