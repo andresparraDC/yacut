@@ -19,11 +19,17 @@ from .constants import MAX_LEN_SHORT
 from .utils import short_url_exist, get_unique_short_id, add_url_map
 from .models import URLMap
 
+from typing import Tuple, Any
+
+
 URLMap_Fields = namedtuple('Fields', 'id original short timestamp')
 
 
-@app.route('/api/id/', methods=['POST'])
-def short_url():
+@app.route(
+    '/api/id/',
+    methods=['POST']
+)
+def short_url() -> Tuple[dict[str, Any], int]:
     """
     POST-запрос на создание новой короткой ссылки.
     """
@@ -47,7 +53,7 @@ def short_url():
 
     add_url_map(original, short)
     APIResponse_Fields = URLMap_Fields(None, 'url', 'short_link', None)
-    response_dict = {
+    response = {
         APIResponse_Fields.short: url_for(
             'mapping',
             short_url=short,
@@ -55,11 +61,14 @@ def short_url():
         ),
         APIResponse_Fields.original: original
     }
-    return jsonify(response_dict), HTTPStatus.CREATED
+    return jsonify(response), HTTPStatus.CREATED
 
 
-@app.route('/api/id/<string:short_id>/', methods=['GET'])
-def get_mapping_url(short_id):
+@app.route(
+    '/api/id/<string:short_id>/',
+    methods=['GET']
+)
+def get_mapping_url(short_id) -> Tuple[dict[str, Any], int]:
     """
     GET-запрос на получение оригинальной ссылки
     по указанному короткому идентификатору.
@@ -69,7 +78,7 @@ def get_mapping_url(short_id):
     url_map = URLMap.query.filter_by(short=short_id).first()
     if url_map is None:
         raise APIException('Указанный id не найден', HTTPStatus.NOT_FOUND)
-    response_dict = {
+    response = {
         APIResponse_Fields.original: url_map.original
     }
-    return response_dict, HTTPStatus.OK
+    return response, HTTPStatus.OK
