@@ -8,8 +8,7 @@
  - index_view()
  - mapping(short_url)
 """
-from http import HTTPStatus
-from flask import flash, render_template, abort, redirect
+from flask import flash, render_template, redirect
 
 from . import app
 from .forms import URLMapForm
