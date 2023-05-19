@@ -61,6 +61,4 @@ def mapping(short_url):
     Перенаправляет с короткой ссылки на оригинальную.
     """
     original_url = URLMap.query.filter_by(short=short_url).first_or_404()
-    if original_url == HTTPStatus.NOT_FOUND:  # 404
-        abort(HTTPStatus.NOT_FOUND)
     return redirect(original_url.original)
